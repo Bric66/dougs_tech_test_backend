@@ -7,6 +7,7 @@ export type ValidateMovementsInput = {
     movements: Movement[];
     balances: Balance[]
 }
+
 export class ValidateMovements implements UseCase<ValidateMovementsInput, Promise<Reason[]>> {
 
     async execute(input: ValidateMovementsInput): Promise<Reason[]> {
@@ -55,7 +56,7 @@ export class ValidateMovements implements UseCase<ValidateMovementsInput, Promis
 
             const date = new Date(balance.date)
             const year = date.getFullYear()
-            const month = date.getMonth()+1
+            const month = date.getMonth() + 1
 
             if (duplicatedMovements.length > 0 || missingMovementsAmount != 0) {
                 reasons.push({

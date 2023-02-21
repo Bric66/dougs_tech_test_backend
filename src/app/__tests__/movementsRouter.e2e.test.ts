@@ -1,9 +1,8 @@
-import "dotenv/config";
 import express from "express";
 import {movementsRouter} from "../routes/movements";
 import supertest from "supertest";
-import {status418Transactions} from "./fixtures/status418Transactions";
-import {status202Transactions} from "./fixtures/status202Transactions";
+import {transactionsWithErrors} from "./fixtures/transactionsWithErrors";
+import {acceptedTransactions} from "./fixtures/acceptedTransactions";
 
 const app = express();
 
@@ -18,7 +17,7 @@ describe("E2E - Movements Router", () => {
         await supertest(app)
             .post("/movements/validation")
             .send(
-                status202Transactions
+                acceptedTransactions
             )
             .expect(202);
     });
@@ -27,7 +26,7 @@ describe("E2E - Movements Router", () => {
         await supertest(app)
             .post("/movements/validation")
             .send(
-                status418Transactions
+                transactionsWithErrors
             )
             .expect((response) => {
                 const responseBody = response.body;

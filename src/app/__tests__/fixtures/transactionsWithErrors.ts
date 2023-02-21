@@ -1,7 +1,7 @@
 import {v4} from "uuid"
-import {ValidateMovementsInput} from "../../usecases/ValidateMovements";
+import {ValidateMovementsInput} from "../../../core/usecases/ValidateMovements";
 
-export const withDuplicatedMovements: ValidateMovementsInput = {
+export const transactionsWithErrors: ValidateMovementsInput = {
     movements: [
         {
             id: v4(),
@@ -43,12 +43,6 @@ export const withDuplicatedMovements: ValidateMovementsInput = {
             id: v4(),
             date: new Date("2023-01-20"),
             label: 'label6',
-            amount: 50,
-        },
-        {
-            id: v4(),
-            date: new Date("2023-01-25"),
-            label: 'label7',
             amount: 50,
         },
         {
