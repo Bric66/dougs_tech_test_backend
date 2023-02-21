@@ -5,12 +5,6 @@ const movementsRouter = express.Router();
 
 const validateMovements = new ValidateMovements();
 
-movementsRouter.get('/', (req, res) => {
-    res.status(200).send({
-        response: "ok"
-    })
-})
-
 movementsRouter.post('/validation', async (req, res) => {
     try {
         const body = {
@@ -21,21 +15,17 @@ movementsRouter.post('/validation', async (req, res) => {
         const reasons = await validateMovements.execute(body);
 
         if (reasons.length > 0) {
-            return res.status(408).send({
-                message: "I'm a teapot",
+            return res.status(418).send({
                 reasons: reasons
             });
         }
 
-        return res.status(202).send({
-            message: 'Accepted'
-        });
+        return res.sendStatus(202)
 
     } catch (err) {
         return res.status(400).send({
             message: err.message,
         });
-
     }
 })
 
